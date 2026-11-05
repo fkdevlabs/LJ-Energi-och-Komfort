@@ -1,0 +1,38 @@
+---
+import settings from '../data/settings.json';
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="container footer__grid">
+    <div>
+      <strong>{settings.companyName}</strong>
+      <p>{settings.tagline}</p>
+      <p>{settings.serviceArea}</p>
+    </div>
+    <div>
+      <strong>Kontakt</strong>
+      <p>
+        <a href={`tel:${settings.phone.replace(/[^\d+]/g, '')}`}>{settings.phone}</a><br />
+        <a href={`mailto:${settings.email}`}>{settings.email}</a><br />
+        {settings.address}
+      </p>
+    </div>
+    <div>
+      <strong>Sidor</strong>
+      <p>
+        <a href="/produkter/">Värmepumpar</a><br />
+        <a href="/om-oss/">Om oss</a><br />
+        <a href="/kontakt/">Begär offert</a>
+      </p>
+    </div>
+  </div>
+  <div class="container footer__bottom">© {year} {settings.companyName} · Org.nr {settings.orgNumber}</div>
+</footer>
+
+<style>
+  .footer { background: #0f2533; color: #c7d4dd; padding: 3rem 0 1.5rem; margin-top: 0; }
+  .footer strong { color: #fff; }
+  .footer a { color: #c7d4dd; }
+  .footer__grid { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+  .footer__bottom { border-top: 1px solid #23404f; margin-top: 2rem; padding-top: 1rem; font-size: .9rem; }
+</style>

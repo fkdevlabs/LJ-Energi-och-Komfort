@@ -1,0 +1,47 @@
+---
+import settings from '../data/settings.json';
+const path = Astro.url.pathname;
+const links = [
+  { href: '/', label: 'Hem' },
+  { href: '/produkter/', label: 'Värmepumpar' },
+  { href: '/om-oss/', label: 'Om oss' },
+  { href: '/kontakt/', label: 'Kontakt' },
+];
+const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+---
+<header class="header">
+  <div class="container header__inner">
+    <a href="/" class="logo">
+      <img src="/favicon.svg" alt="" width="32" height="32" />
+      <span>{settings.companyName}</span>
+    </a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Öppna meny" />
+    <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span></label>
+    <nav class="nav">
+      {links.map((l) => (
+        <a href={l.href} class:list={{ active: isActive(l.href) }}>{l.label}</a>
+      ))}
+      <a href={`tel:${settings.phone.replace(/[^\d+]/g, '')}`} class="btn nav__cta">Ring {settings.phone}</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header { position: sticky; top: 0; z-index: 10; background: #fff; border-bottom: 1px solid var(--c-border); }
+  .header__inner { display: flex; align-items: center; justify-content: space-between; min-height: 70px; }
+  .logo { display: flex; align-items: center; gap: .6rem; font-weight: 700; font-size: 1.15rem; color: var(--c-text); text-decoration: none; }
+  .nav { display: flex; align-items: center; gap: 1.5rem; }
+  .nav a:not(.btn) { color: var(--c-text); text-decoration: none; font-weight: 500; }
+  .nav a.active, .nav a:not(.btn):hover { color: var(--c-primary); }
+  .nav__cta { padding: .6rem 1.1rem; }
+  .nav-toggle, .nav-burger { display: none; }
+  @media (max-width: 820px) {
+    .nav-burger { display: block; width: 32px; height: 24px; position: relative; cursor: pointer; }
+    .nav-burger span, .nav-burger::before, .nav-burger::after { content: ''; position: absolute; left: 0; right: 0; height: 3px; background: var(--c-text); border-radius: 2px; }
+    .nav-burger span { top: 10px; } .nav-burger::before { top: 0; } .nav-burger::after { bottom: 0; }
+    .nav { display: none; position: absolute; top: 70px; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: #fff; border-bottom: 1px solid var(--c-border); padding: .5rem 1rem 1rem; }
+    .nav a:not(.btn) { padding: .75rem 0; border-bottom: 1px solid var(--c-border); }
+    .nav__cta { margin-top: 1rem; text-align: center; }
+    .nav-toggle:checked ~ .nav { display: flex; }
+  }
+</style>

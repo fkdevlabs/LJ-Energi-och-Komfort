@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ProductCard from '../../components/ProductCard.astro';
+
+const products = (await getCollection('products')).sort((a, b) => a.data.order - b.data.order);
+const types = ['Luft/luft', 'Luft/vatten'] as const;
+---
+<Base title="Värmepumpar" description="Luft/luft- och luft/vatten-värmepumpar med fast pris inklusive installation.">
+  <section class="section">
+    <div class="container">
+      <h1>Våra värmepumpar</h1>
+      <p class="lead">Alla priser inkluderar standardinstallation. ROT-avdrag dras direkt på fakturan.</p>
+      {types.map((t) => {
+        const list = products.filter((p) => p.data.type === t);
+        return list.length > 0 && (
+          <section class="group">
+            <h2>{t}-värmepumpar</h2>
+            <div class="grid grid--3">
+              {list.map((p) => <ProductCard product={p} />)}
+            </div>
+          </section>
+        );
+      })}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .group { margin-top: 3rem; }
+</style>

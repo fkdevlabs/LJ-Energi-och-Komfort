@@ -1,0 +1,52 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { formatPrice } from '../lib';
+interface Props { product: CollectionEntry<'products'> }
+const { product } = Astro.props;
+const p = product.data;
+---
+<article class="card product">
+  <a href={`/produkter/${product.id}/`} class="product__img">
+    <img src={p.image} alt={p.title} loading="lazy" width="400" height="300" />
+    {p.campaignPrice && <span class="badge badge--sale product__flag">Kampanj</span>}
+  </a>
+  <div class="product__body">
+    <span class="badge">{p.type}</span>
+    <h3><a href={`/produkter/${product.id}/`}>{p.title}</a></h3>
+    <p class="product__excerpt">{p.excerpt}</p>
+    <ul class="product__specs">
+      {p.energyClass && <li>Energiklass <b>{p.energyClass}</b></li>}
+      {p.scop && <li>SCOP <b>{p.scop}</b></li>}
+      {p.suitableFor && <li><b>{p.suitableFor}</b></li>}
+    </ul>
+    <div class="product__foot">
+      <div class="product__price">
+        {p.campaignPrice ? (
+          <><s>{formatPrice(p.price)}</s> <strong>{formatPrice(p.campaignPrice)}</strong></>
+        ) : (
+          <strong>{formatPrice(p.price)}</strong>
+        )}
+        <small>inkl. installation</small>
+      </div>
+      <a href={`/produkter/${product.id}/`} class="btn btn--outline">Läs mer</a>
+    </div>
+  </div>
+</article>
+
+<style>
+  .product { display: flex; flex-direction: column; overflow: hidden; }
+  .product__img { position: relative; background: var(--c-soft); aspect-ratio: 4 / 3; }
+  .product__img img { width: 100%; height: 100%; object-fit: cover; }
+  .product__flag { position: absolute; top: .75rem; left: .75rem; }
+  .product__body { padding: 1.25rem; display: flex; flex-direction: column; flex: 1; }
+  .product__body h3 { margin: .5rem 0 .25rem; }
+  .product__body h3 a { color: var(--c-text); text-decoration: none; }
+  .product__excerpt { color: var(--c-muted); margin: 0 0 .75rem; }
+  .product__specs { list-style: none; padding: 0; margin: 0 0 1rem; display: flex; flex-wrap: wrap; gap: .4rem 1rem; font-size: .9rem; color: var(--c-muted); }
+  .product__foot { margin-top: auto; display: flex; align-items: end; justify-content: space-between; gap: 1rem; }
+  .product__price { display: flex; flex-direction: column; }
+  .product__price strong { font-size: 1.35rem; color: var(--c-primary); }
+  .product__price s { color: var(--c-muted); font-size: .9rem; }
+  .product__price small { color: var(--c-muted); }
+  .product__foot .btn { padding: .55rem 1rem; }
+</style>

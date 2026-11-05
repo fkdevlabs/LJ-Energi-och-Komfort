@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import settings from '../data/settings.json';
+---
+<Base title="Kontakt & offert" description="Begär en kostnadsfri offert på luftvärmepump inklusive installation.">
+  <section class="section">
+    <div class="container contact">
+      <div>
+        <h1>Begär kostnadsfri offert</h1>
+        <p class="lead">Berätta lite om ditt hus så återkommer vi inom 24 timmar med förslag och pris.</p>
+        <QuoteForm />
+      </div>
+      <aside class="card contact__info">
+        <h2>Kontakta oss direkt</h2>
+        <p><b>Telefon</b><br /><a href={`tel:${settings.phone.replace(/[^\d+]/g, '')}`}>{settings.phone}</a></p>
+        <p><b>E-post</b><br /><a href={`mailto:${settings.email}`}>{settings.email}</a></p>
+        <p><b>Adress</b><br />{settings.address}</p>
+        <p>{settings.serviceArea}</p>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact { display: grid; gap: 2.5rem; grid-template-columns: 2fr 1fr; align-items: start; }
+  .contact__info { padding: 1.75rem; position: sticky; top: 90px; }
+  .contact__info h2 { font-size: 1.25rem; }
+  @media (max-width: 820px) { .contact { grid-template-columns: 1fr; } .contact__info { position: static; } }
+</style>

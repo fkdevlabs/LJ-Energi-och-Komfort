@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import settings from '../data/settings.json';
+---
+<Base title="Om oss">
+  <section class="section">
+    <div class="container prose">
+      <h1>Om {settings.companyName}</h1>
+      <p class="lead">Vi är ett lokalt företag som hjälper villaägare att sänka sina energikostnader med moderna värmepumpar.</p>
+      <p>Vi tar hand om hela processen – från rådgivning och platsbesök till installation, ROT-avdrag och service. Våra installatörer är certifierade för arbete med köldmedia.</p>
+      <p>{settings.serviceArea}.</p>
+      <p><a href="/kontakt/" class="btn">Kontakta oss</a></p>
+    </div>
+  </section>
+</Base>

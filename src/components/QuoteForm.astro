@@ -1,0 +1,66 @@
+---
+import { getCollection } from 'astro:content';
+const products = (await getCollection('products')).sort((a, b) => a.data.order - b.data.order);
+interface Props { selected?: string }
+const { selected } = Astro.props;
+---
+<!-- Netlify Forms: formuläret upptäcks automatiskt vid deploy. Svar hittas under Site → Forms i Netlify. -->
+<form name="offert" method="POST" action="/tack/" data-netlify="true" netlify-honeypot="bot-field" class="card quote">
+  <input type="hidden" name="form-name" value="offert" />
+  <p hidden><label>Fyll inte i detta: <input name="bot-field" /></label></p>
+
+  <div class="quote__row">
+    <label>Namn *<input type="text" name="namn" required autocomplete="name" /></label>
+    <label>Telefon *<input type="tel" name="telefon" required autocomplete="tel" /></label>
+  </div>
+  <div class="quote__row">
+    <label>E-post *<input type="email" name="epost" required autocomplete="email" /></label>
+    <label>Postnummer *<input type="text" name="postnummer" required autocomplete="postal-code" inputmode="numeric" /></label>
+  </div>
+  <div class="quote__row">
+    <label>Intresserad av
+      <select name="produkt" id="quote-product">
+        <option value="Vet inte – vill ha rådgivning">Vet inte – vill ha rådgivning</option>
+        {products.map((p) => (
+          <option value={p.data.title} data-slug={p.id} selected={p.id === selected}>{p.data.title} ({p.data.type})</option>
+        ))}
+      </select>
+    </label>
+    <label>Husets storlek (m²)<input type="number" name="boyta" min="10" max="1000" /></label>
+  </div>
+  <label>Nuvarande uppvärmning
+    <select name="uppvarmning">
+      <option>Direktverkande el</option>
+      <option>Vattenburen el (elpanna)</option>
+      <option>Olja</option>
+      <option>Pellets / ved</option>
+      <option>Fjärrvärme</option>
+      <option>Annat</option>
+    </select>
+  </label>
+  <label>Meddelande<textarea name="meddelande" rows="4"></textarea></label>
+  <label class="quote__consent"><input type="checkbox" name="samtycke" required /> Jag godkänner att mina uppgifter sparas för att kunna besvara min förfrågan.</label>
+  <button type="submit" class="btn">Skicka offertförfrågan</button>
+</form>
+
+<script is:inline>
+  // Förvälj produkt via ?produkt=slug
+  (function () {
+    var slug = new URLSearchParams(location.search).get('produkt');
+    if (!slug) return;
+    var opt = document.querySelector('#quote-product option[data-slug="' + CSS.escape(slug) + '"]');
+    if (opt) opt.selected = true;
+  })();
+</script>
+
+<style>
+  .quote { padding: 1.75rem; display: grid; gap: 1rem; }
+  .quote__row { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .quote label { display: flex; flex-direction: column; gap: .35rem; font-weight: 500; font-size: .95rem; }
+  .quote input:not([type='checkbox']), .quote select, .quote textarea {
+    font: inherit; padding: .7rem .8rem; border: 1px solid var(--c-border); border-radius: 8px; background: #fff;
+  }
+  .quote input:focus, .quote select:focus, .quote textarea:focus { outline: 2px solid var(--c-primary); outline-offset: 1px; }
+  .quote .quote__consent { flex-direction: row; align-items: flex-start; gap: .5rem; font-weight: 400; color: var(--c-muted); }
+  .quote button { justify-self: start; }
+</style>

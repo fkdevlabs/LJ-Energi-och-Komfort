@@ -24,7 +24,8 @@ import settings from '../data/settings.json';
 
 <style>
   .contact { display: grid; gap: 2.5rem; grid-template-columns: 2fr 1fr; align-items: start; }
-  .contact__info { padding: 1.75rem; position: sticky; top: 90px; }
+  .contact__info { padding: 2rem; position: sticky; top: 100px; background: linear-gradient(160deg, var(--c-red-dark), var(--c-red)); color: #fff; border: 0; }
+  .contact__info a { color: var(--c-yellow); font-weight: 600; }
   .contact__info h2 { font-size: 1.25rem; }
   @media (max-width: 820px) { .contact { grid-template-columns: 1fr; } .contact__info { position: static; } }
 </style>

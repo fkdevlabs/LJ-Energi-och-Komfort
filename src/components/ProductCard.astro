@@ -4,49 +4,59 @@ import { formatPrice } from '../lib';
 interface Props { product: CollectionEntry<'products'> }
 const { product } = Astro.props;
 const p = product.data;
+const href = `/produkter/${product.id}/`;
 ---
 <article class="card product">
-  <a href={`/produkter/${product.id}/`} class="product__img">
+  <a href={href} class="product__img">
     <img src={p.image} alt={p.title} loading="lazy" width="400" height="300" />
-    {p.campaignPrice && <span class="badge badge--sale product__flag">Kampanj</span>}
+    <div class="product__flags">
+      <span class="badge">{p.type}</span>
+      {p.campaignPrice && <span class="badge badge--sale">Kampanj</span>}
+    </div>
+    {p.energyClass && <span class="product__energy">{p.energyClass}</span>}
   </a>
   <div class="product__body">
-    <span class="badge">{p.type}</span>
-    <h3><a href={`/produkter/${product.id}/`}>{p.title}</a></h3>
+    <p class="product__brand">{p.brand}</p>
+    <h3><a href={href}>{p.title}</a></h3>
     <p class="product__excerpt">{p.excerpt}</p>
-    <ul class="product__specs">
-      {p.energyClass && <li>Energiklass <b>{p.energyClass}</b></li>}
-      {p.scop && <li>SCOP <b>{p.scop}</b></li>}
-      {p.suitableFor && <li><b>{p.suitableFor}</b></li>}
-    </ul>
+    <dl class="product__specs">
+      {p.scop && <div><dt>SCOP</dt><dd>{p.scop}</dd></div>}
+      {p.suitableFor && <div><dt>Passar</dt><dd>{p.suitableFor.replace(/^Upp till /i, '≤ ')}</dd></div>}
+      {p.minOutdoorTemp !== undefined && <div><dt>Ner till</dt><dd>{p.minOutdoorTemp} °C</dd></div>}
+    </dl>
     <div class="product__foot">
       <div class="product__price">
-        {p.campaignPrice ? (
-          <><s>{formatPrice(p.price)}</s> <strong>{formatPrice(p.campaignPrice)}</strong></>
-        ) : (
-          <strong>{formatPrice(p.price)}</strong>
-        )}
+        {p.campaignPrice && <s>{formatPrice(p.price)}</s>}
+        <strong>{formatPrice(p.campaignPrice ?? p.price)}</strong>
         <small>inkl. installation</small>
       </div>
-      <a href={`/produkter/${product.id}/`} class="btn btn--outline">Läs mer</a>
+      <a href={href} class="product__go" aria-label={`Läs mer om ${p.title}`}>→</a>
     </div>
   </div>
 </article>
 
 <style>
-  .product { display: flex; flex-direction: column; overflow: hidden; }
-  .product__img { position: relative; background: var(--c-soft); aspect-ratio: 4 / 3; }
-  .product__img img { width: 100%; height: 100%; object-fit: cover; }
-  .product__flag { position: absolute; top: .75rem; left: .75rem; }
-  .product__body { padding: 1.25rem; display: flex; flex-direction: column; flex: 1; }
-  .product__body h3 { margin: .5rem 0 .25rem; }
-  .product__body h3 a { color: var(--c-text); text-decoration: none; }
-  .product__excerpt { color: var(--c-muted); margin: 0 0 .75rem; }
-  .product__specs { list-style: none; padding: 0; margin: 0 0 1rem; display: flex; flex-wrap: wrap; gap: .4rem 1rem; font-size: .9rem; color: var(--c-muted); }
+  .product { display: flex; flex-direction: column; overflow: hidden; transition: transform .2s, box-shadow .2s; }
+  .product:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(28,20,20,.1); }
+  .product__img { position: relative; display: block; background: linear-gradient(180deg, #f7f4f1, #efe9e4); aspect-ratio: 4 / 3; padding: 1.5rem; }
+  .product__img img { width: 100%; height: 100%; object-fit: contain; transition: transform .3s; }
+  .product:hover .product__img img { transform: scale(1.04); }
+  .product__flags { position: absolute; top: 1rem; left: 1rem; display: flex; gap: .4rem; }
+  .product__flags .badge:not(.badge--sale) { background: #fff; }
+  .product__energy { position: absolute; top: 1rem; right: 1rem; background: #1f9d55; color: #fff; font: 700 .8rem/1 var(--f-body); padding: .4rem .6rem .4rem .5rem; clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%); padding-right: 1rem; }
+  .product__body { padding: 1.5rem; display: flex; flex-direction: column; flex: 1; }
+  .product__brand { margin: 0 0 .2rem; font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--c-muted); }
+  .product__body h3 { margin: 0 0 .5rem; font-size: 1.45rem; }
+  .product__body h3 a { color: var(--c-ink); text-decoration: none; }
+  .product__excerpt { color: var(--c-muted); margin: 0 0 1.25rem; font-size: .95rem; }
+  .product__specs { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; margin: 0 0 1.5rem; padding: .9rem 0; border-block: 1px solid var(--c-border); }
+  .product__specs dt { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--c-muted); }
+  .product__specs dd { margin: 0; font-weight: 700; font-size: .95rem; }
   .product__foot { margin-top: auto; display: flex; align-items: end; justify-content: space-between; gap: 1rem; }
-  .product__price { display: flex; flex-direction: column; }
-  .product__price strong { font-size: 1.35rem; color: var(--c-primary); }
+  .product__price { display: flex; flex-direction: column; line-height: 1.2; }
+  .product__price strong { font: 700 1.7rem/1.1 var(--f-head); color: var(--c-red); }
   .product__price s { color: var(--c-muted); font-size: .9rem; }
-  .product__price small { color: var(--c-muted); }
-  .product__foot .btn { padding: .55rem 1rem; }
+  .product__price small { color: var(--c-muted); font-size: .8rem; }
+  .product__go { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: var(--c-yellow); color: var(--c-ink); font-size: 1.3rem; font-weight: 700; text-decoration: none; transition: background .15s, transform .15s; }
+  .product__go:hover { background: var(--c-red); color: #fff; transform: translateX(3px); }
 </style>

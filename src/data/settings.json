@@ -9,18 +9,57 @@
   "hero": {
     "title": "Sänk din värmekostnad med upp till 50 %",
     "text": "Vi säljer, installerar och servar luftvärmepumpar från ledande tillverkare. Fast pris, certifierade installatörer och ROT-avdrag direkt på fakturan.",
-    "buttonText": "Få kostnadsfri offert"
+    "buttonText": "Få kostnadsfri offert",
+    "highlight": "upp till 50 %"
   },
   "usps": [
-    { "title": "Certifierade installatörer", "text": "Installation enligt tillverkarens krav och gällande regler för köldmedia." },
-    { "title": "Fast pris inkl. installation", "text": "Inga överraskningar – du vet exakt vad det kostar innan vi börjar." },
-    { "title": "ROT-avdrag direkt", "text": "Vi drar av ROT på arbetskostnaden direkt på fakturan." },
-    { "title": "Service & support", "text": "Vi finns kvar efter installationen med service och garanti." }
+    {
+      "title": "Certifierade installatörer",
+      "text": "Installation enligt tillverkarens krav och gällande regler för köldmedia."
+    },
+    {
+      "title": "Fast pris inkl. installation",
+      "text": "Inga överraskningar – du vet exakt vad det kostar innan vi börjar."
+    },
+    {
+      "title": "ROT-avdrag direkt",
+      "text": "Vi drar av ROT på arbetskostnaden direkt på fakturan."
+    },
+    {
+      "title": "Service & support",
+      "text": "Vi finns kvar efter installationen med service och garanti."
+    }
   ],
   "faq": [
-    { "question": "Hur mycket kan jag spara med en luftvärmepump?", "answer": "Det beror på ditt hus och nuvarande uppvärmning, men många hushåll med direktverkande el sänker sin uppvärmningskostnad med 30–50 %." },
-    { "question": "Fungerar en luftvärmepump när det är riktigt kallt ute?", "answer": "Ja. Moderna nordiska modeller är byggda för svenska vintrar och levererar värme ner till -25 °C eller lägre." },
-    { "question": "Hur lång tid tar installationen?", "answer": "En luft/luft-värmepump installeras normalt på en dag. En luft/vatten-värmepump tar oftast 1–2 dagar." },
-    { "question": "Kan jag få ROT-avdrag?", "answer": "Ja, ROT-avdrag gäller för arbetskostnaden vid installation. Vi sköter ansökan och drar av beloppet direkt på fakturan." }
+    {
+      "question": "Hur mycket kan jag spara med en luftvärmepump?",
+      "answer": "Det beror på ditt hus och nuvarande uppvärmning, men många hushåll med direktverkande el sänker sin uppvärmningskostnad med 30–50 %."
+    },
+    {
+      "question": "Fungerar en luftvärmepump när det är riktigt kallt ute?",
+      "answer": "Ja. Moderna nordiska modeller är byggda för svenska vintrar och levererar värme ner till -25 °C eller lägre."
+    },
+    {
+      "question": "Hur lång tid tar installationen?",
+      "answer": "En luft/luft-värmepump installeras normalt på en dag. En luft/vatten-värmepump tar oftast 1–2 dagar."
+    },
+    {
+      "question": "Kan jag få ROT-avdrag?",
+      "answer": "Ja, ROT-avdrag gäller för arbetskostnaden vid installation. Vi sköter ansökan och drar av beloppet direkt på fakturan."
+    }
+  ],
+  "stats": [
+    {
+      "value": "−50 %",
+      "label": "lägre värmekostnad"
+    },
+    {
+      "value": "1 dag",
+      "label": "typisk installation"
+    },
+    {
+      "value": "5 år",
+      "label": "garanti"
+    }
   ]
 }

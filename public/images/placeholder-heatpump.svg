@@ -1,1 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect width="400" height="300" fill="#e8f1f8"/><rect x="70" y="70" width="260" height="160" rx="14" fill="#fff" stroke="#9fb7c9" stroke-width="4"/><circle cx="160" cy="150" r="55" fill="none" stroke="#9fb7c9" stroke-width="4"/><g stroke="#9fb7c9" stroke-width="4"><line x1="160" y1="95" x2="160" y2="205"/><line x1="105" y1="150" x2="215" y2="150"/><line x1="121" y1="111" x2="199" y2="189"/><line x1="121" y1="189" x2="199" y2="111"/></g><g stroke="#9fb7c9" stroke-width="4"><line x1="240" y1="110" x2="305" y2="110"/><line x1="240" y1="130" x2="305" y2="130"/><line x1="240" y1="150" x2="305" y2="150"/><line x1="240" y1="170" x2="305" y2="170"/><line x1="240" y1="190" x2="305" y2="190"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e9e4e0"/>
+    </linearGradient>
+    <radialGradient id="fan" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#4a3f3d"/><stop offset="1" stop-color="#231b1a"/>
+    </radialGradient>
+  </defs>
+  <ellipse cx="200" cy="252" rx="150" ry="10" fill="#000" opacity=".12"/>
+  <rect x="78" y="232" width="34" height="16" rx="3" fill="#8f8683"/>
+  <rect x="288" y="232" width="34" height="16" rx="3" fill="#8f8683"/>
+  <rect x="60" y="62" width="280" height="176" rx="14" fill="url(#body)" stroke="#d4ccc7" stroke-width="2"/>
+  <rect x="60" y="62" width="280" height="10" rx="5" fill="#fff" opacity=".9"/>
+  <circle cx="160" cy="150" r="66" fill="#d9d2cd"/>
+  <circle cx="160" cy="150" r="60" fill="url(#fan)"/>
+  <g fill="#6d625f" opacity=".9">
+    <path d="M160 150 C150 120 160 100 175 96 C178 118 172 136 160 150Z"/>
+    <path d="M160 150 C190 140 210 150 214 165 C192 168 174 162 160 150Z"/>
+    <path d="M160 150 C170 180 160 200 145 204 C142 182 148 164 160 150Z"/>
+    <path d="M160 150 C130 160 110 150 106 135 C128 132 146 138 160 150Z"/>
+  </g>
+  <circle cx="160" cy="150" r="9" fill="#d9d2cd"/>
+  <g fill="none" stroke="#b9b0ab" stroke-width="1.6">
+    <circle cx="160" cy="150" r="50"/><circle cx="160" cy="150" r="38"/><circle cx="160" cy="150" r="26"/>
+    <line x1="100" y1="150" x2="220" y2="150"/><line x1="160" y1="90" x2="160" y2="210"/>
+  </g>
+  <g fill="#d6cec9">
+    <rect x="248" y="92" width="68" height="6" rx="3"/><rect x="248" y="108" width="68" height="6" rx="3"/>
+    <rect x="248" y="124" width="68" height="6" rx="3"/><rect x="248" y="140" width="68" height="6" rx="3"/>
+    <rect x="248" y="156" width="68" height="6" rx="3"/><rect x="248" y="172" width="68" height="6" rx="3"/>
+    <rect x="248" y="188" width="68" height="6" rx="3"/>
+  </g>
+  <rect x="248" y="210" width="40" height="10" rx="3" fill="#d0102b"/>
+</svg>

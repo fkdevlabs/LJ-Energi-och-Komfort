@@ -64,8 +64,16 @@ collections:
             widget: object
             fields:
               - { name: title, label: Rubrik, widget: string }
+              - { name: highlight, label: "Markerad del av rubriken", widget: string, required: false, hint: "Måste finnas ordagrant i rubriken, visas i gult" }
               - { name: text, label: Text, widget: text }
               - { name: buttonText, label: Knapptext, widget: string }
+          - name: stats
+            label: Siffror i toppsektionen
+            widget: list
+            max: 4
+            fields:
+              - { name: value, label: Värde, widget: string }
+              - { name: label, label: Beskrivning, widget: string }
           - name: usps
             label: Säljargument
             widget: list

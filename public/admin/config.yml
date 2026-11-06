@@ -9,7 +9,7 @@ local_backend: true
 locale: sv
 site_url: https://lj-energi-och-komfort.netlify.app
 display_url: https://lj-energi-och-komfort.netlify.app
-publish_mode: editorial_workflow
+publish_mode: editorial_workflow # lokalt (localhost) används 'simple', se src/pages/admin/index.astro
 
 media_folder: public/images/uploads
 public_folder: /images/uploads

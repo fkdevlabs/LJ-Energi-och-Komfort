@@ -1,0 +1,223 @@
+---
+// Decap CMS admin. Lives in src/pages (not public/) so /admin/ also works in `astro dev`,
+// and so the live preview can reuse the site's real CSS. The CMS config is public/admin/config.yml.
+---
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Innehållshantering – LJ Energi och Komfort</title>
+    <script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  </head>
+  <body>
+    <script is:inline>window.CMS_MANUAL_INIT = true;</script>
+    <script is:inline src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <script>
+      // Live preview: same CSS and markup as the real pages.
+      // If you change the markup in ProductCard.astro, produkter/[slug].astro or index.astro, update it here too.
+      import globalCss from '../../styles/global.css?inline';
+      import productCss from '../../styles/product.css?inline';
+      import homeCss from '../../styles/home.css?inline';
+      import { formatPrice, uspIcons, steps } from '../../lib';
+
+      const CMS = (window as any).CMS;
+      const h = (window as any).h;
+      const PLACEHOLDER = '/images/placeholder-heatpump.svg';
+
+      for (const css of [globalCss, productCss, homeCss]) CMS.registerPreviewStyle(css, { raw: true });
+      CMS.registerPreviewStyle(
+        `.pv-label { font: 600 .75rem/1 var(--f-body); letter-spacing: .1em; text-transform: uppercase; color: var(--c-muted); margin: 0 0 1rem; }
+         .pv-card { max-width: 380px; margin-bottom: 1rem; }
+         .pv-sep { border: 0; border-top: 2px dashed var(--c-border); margin: 0; }`,
+        { raw: true },
+      );
+
+      const toJS = (v: any) => (v && v.toJS ? v.toJS() : v);
+      const has = (v: any) => v !== undefined && v !== null && v !== '';
+
+      function ProductPreview({ entry, widgetFor, getAsset }: any) {
+        const p = toJS(entry.get('data')) || {};
+        const features: string[] = (p.features || []).filter(Boolean);
+        const img = p.image ? String(getAsset(p.image)) : PLACEHOLDER;
+        const title = p.title || 'Produktnamn';
+        const price = formatPrice(Number(p.campaignPrice ?? p.price ?? 0));
+        const specs = [
+          ['Typ', p.type],
+          ['Märke', p.brand],
+          ['Energiklass', p.energyClass],
+          ['SCOP', p.scop],
+          ['Värmeeffekt', p.heatingCapacity],
+          ['Passar för', p.suitableFor],
+          ['Fungerar ner till', has(p.minOutdoorTemp) ? `${p.minOutdoorTemp} °C` : undefined],
+          ['Ljudnivå inomhus', has(p.noiseLevel) ? `${p.noiseLevel} dB(A)` : undefined],
+        ].filter(([, v]) => has(v));
+        const inStock = p.inStock !== false;
+
+        const card = h('article', { className: 'card product' },
+          h('a', { className: 'product__img' },
+            h('img', { src: img, alt: title }),
+            h('div', { className: 'product__flags' },
+              h('span', { className: 'badge' }, p.type),
+              has(p.campaignPrice) && h('span', { className: 'badge badge--sale' }, 'Kampanj'),
+            ),
+            p.energyClass && h('span', { className: 'product__energy' }, p.energyClass),
+          ),
+          h('div', { className: 'product__body' },
+            h('p', { className: 'product__brand' }, p.brand),
+            h('h3', null, h('a', null, title)),
+            h('p', { className: 'product__excerpt' }, p.excerpt),
+            h('dl', { className: 'product__specs' },
+              has(p.scop) && h('div', null, h('dt', null, 'SCOP'), h('dd', null, p.scop)),
+              p.suitableFor && h('div', null, h('dt', null, 'Passar'), h('dd', null, String(p.suitableFor).replace(/^Upp till /i, '≤ '))),
+              has(p.minOutdoorTemp) && h('div', null, h('dt', null, 'Ner till'), h('dd', null, `${p.minOutdoorTemp} °C`)),
+            ),
+            h('div', { className: 'product__foot' },
+              h('div', { className: 'product__price' },
+                has(p.campaignPrice) && h('s', null, formatPrice(Number(p.price ?? 0))),
+                h('strong', null, price),
+                h('small', null, 'inkl. moms'),
+              ),
+              h('a', { className: 'product__go' }, '→'),
+            ),
+          ),
+        );
+
+        const page = h('div', { className: 'container' },
+          h('a', { className: 'back' }, '← Alla värmepumpar'),
+          h('div', { className: 'detail' },
+            h('img', { src: img, alt: title, className: 'card' }),
+            h('div', null,
+              h('span', { className: 'badge' }, p.type),
+              has(p.campaignPrice) && h('span', { className: 'badge badge--sale' }, 'Kampanj'),
+              h('h1', null, title),
+              h('p', { className: 'lead' }, p.excerpt),
+              h('div', { className: 'price' },
+                has(p.campaignPrice)
+                  ? [h('s', { key: 's' }, formatPrice(Number(p.price ?? 0))), ' ', h('strong', { key: 'b' }, price)]
+                  : h('strong', null, price),
+                h('small', null, 'inkl. moms'),
+              ),
+              h('p', { className: inStock ? 'stock stock--yes' : 'stock stock--no' },
+                inStock ? '● I lager – snabb leverans' : '● Beställningsvara'),
+              features.length > 0 && h('ul', { className: 'features' }, features.map((f, i) => h('li', { key: i }, f))),
+              h('a', { className: 'btn' }, `Begär offert på ${title}`),
+            ),
+          ),
+          h('div', { className: 'detail__more' },
+            h('div', { className: 'prose' }, widgetFor('body')),
+            h('div', null,
+              h('h2', { className: 'specs__title' }, 'Teknisk data'),
+              h('table', { className: 'specs card' },
+                h('tbody', null, specs.map(([k, v]) => h('tr', { key: k }, h('th', null, k), h('td', null, v)))),
+              ),
+            ),
+          ),
+        );
+
+        return h('div', null,
+          h('section', { className: 'section section--soft' },
+            h('div', { className: 'container' },
+              h('p', { className: 'pv-label' }, 'Produktkort (startsida & sortiment)'),
+              h('div', { className: 'pv-card' }, card),
+            ),
+          ),
+          h('hr', { className: 'pv-sep' }),
+          h('section', { className: 'section' },
+            h('div', { className: 'container' }, h('p', { className: 'pv-label' }, 'Produktsida')),
+            page,
+          ),
+        );
+      }
+
+      function SettingsPreview({ entry }: any) {
+        const d = toJS(entry.get('data')) || {};
+        const hero = d.hero || {};
+        const title: string = hero.title || '';
+        const hl: string = hero.highlight || '';
+        const parts = hl && title.includes(hl) ? title.split(hl) : [title];
+        const button = hero.buttonText || 'Få kostnadsfri offert';
+
+        return h('div', null,
+          h('section', { className: 'hero' },
+            h('div', { className: 'container hero__inner' },
+              h('div', { className: 'hero__text' },
+                h('span', { className: 'hero__eyebrow' }, 'Försäljning · Rådgivning · Service'),
+                h('h1', null, parts[0], parts.length > 1 && [h('mark', { key: 'm' }, hl), parts.slice(1).join(hl)]),
+                h('p', { className: 'hero__lead' }, hero.text),
+                h('div', { className: 'hero__actions' },
+                  h('a', { className: 'btn btn--light' }, `${button} →`),
+                  h('a', { className: 'btn btn--ghost' }, 'Se värmepumpar'),
+                ),
+                h('dl', { className: 'hero__stats' },
+                  (d.stats || []).map((s: any, i: number) => h('div', { key: i }, h('dt', null, s.value), h('dd', null, s.label))),
+                ),
+              ),
+              h('div', { className: 'hero__visual', 'aria-hidden': true },
+                h('div', { className: 'hero__blob' }),
+                h('img', { src: PLACEHOLDER, alt: '' }),
+              ),
+            ),
+          ),
+          h('section', { className: 'section usps-wrap' },
+            h('div', { className: 'container grid grid--4 usps' },
+              (d.usps || []).map((u: any, i: number) => h('div', { className: 'usp', key: i },
+                h('span', { className: 'usp__icon' },
+                  h('svg', {
+                    viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2,
+                    strokeLinecap: 'round', strokeLinejoin: 'round',
+                    dangerouslySetInnerHTML: { __html: uspIcons[i % uspIcons.length] },
+                  }),
+                ),
+                h('h3', null, u.title),
+                h('p', null, u.text),
+              )),
+            ),
+          ),
+          h('section', { className: 'section' },
+            h('div', { className: 'container' },
+              h('span', { className: 'eyebrow' }, 'Enkelt från start till mål'),
+              h('h2', null, 'Så går det till'),
+              h('ol', { className: 'steps' },
+                steps.map((s, i) => h('li', { key: i }, h('b', null, s.title), h('span', null, s.text))),
+              ),
+            ),
+          ),
+          h('section', { className: 'section section--soft' },
+            h('div', { className: 'container faq' },
+              h('div', null,
+                h('span', { className: 'eyebrow' }, 'FAQ'),
+                h('h2', null, 'Vanliga frågor'),
+                h('p', { className: 'lead' }, 'Hittar du inte svaret? Ring oss på ', h('a', null, d.phone), '.'),
+              ),
+              h('div', { className: 'faq__list' },
+                (d.faq || []).map((f: any, i: number) => h('details', { key: i, open: true },
+                  h('summary', null, f.question),
+                  h('p', null, f.answer),
+                )),
+              ),
+            ),
+          ),
+          h('section', { className: 'cta' },
+            h('div', { className: 'container cta__inner' },
+              h('div', null,
+                h('h2', null, 'Redo att sänka din elräkning?'),
+                h('p', null, 'Kostnadsfri offert – helt utan förpliktelser.'),
+              ),
+              h('a', { className: 'btn' }, `${button} →`),
+            ),
+          ),
+        );
+      }
+
+      CMS.registerPreviewTemplate('products', ProductPreview);
+      CMS.registerPreviewTemplate('site', SettingsPreview);
+
+      // Merged on top of public/admin/config.yml. The local decap-server (`npm run cms`) writes files
+      // directly and can't do the draft/review workflow, so publish straight away when running locally.
+      const isLocal = ['localhost', '127.0.0.1'].includes(location.hostname);
+      CMS.init(isLocal ? { config: { publish_mode: 'simple' } } : {});
+    </script>
+  </body>
+</html>

@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { formatPrice } from '../../lib';
+import '../../styles/product.css';
 
 export async function getStaticPaths() {
   const products = await getCollection('products');
@@ -67,22 +68,3 @@ const specs = [
   </section>
 </Base>
 
-<style>
-  .back { display: inline-block; margin-bottom: 1.5rem; text-decoration: none; }
-  .detail { display: grid; gap: 2.5rem; grid-template-columns: 1fr 1fr; align-items: start; }
-  .detail img { width: 100%; padding: 2rem; background: linear-gradient(180deg, #f2f8f4, #e3f0e7); }
-  .detail h1 { margin-top: .75rem; }
-  .detail .badge + .badge { margin-left: .4rem; }
-  .price { display: flex; flex-direction: column; margin: 1rem 0; }
-  .price strong { font: 700 2.4rem/1.1 var(--f-head); color: var(--c-primary); }
-  .price s, .price small { color: var(--c-muted); }
-  .stock { font-weight: 600; }
-  .stock--yes { color: #1e8a4c; } .stock--no { color: #a35f00; }
-  .features { padding-left: 1.2rem; margin-bottom: 1.5rem; }
-  .detail__more { display: grid; gap: 2.5rem; grid-template-columns: 1.4fr 1fr; margin-top: 3rem; align-items: start; }
-  .specs { border-collapse: collapse; width: 100%; overflow: hidden; }
-  .specs__title { font-size: 1.4rem; }
-  .specs th, .specs td { padding: .7rem 1rem; text-align: left; border-bottom: 1px solid var(--c-border); }
-  .specs th { color: var(--c-muted); font-weight: 500; width: 45%; }
-  @media (max-width: 820px) { .detail, .detail__more { grid-template-columns: 1fr; } }
-</style>

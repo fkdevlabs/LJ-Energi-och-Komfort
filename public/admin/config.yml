@@ -33,6 +33,7 @@ collections:
       - { name: campaignPrice, label: "Kampanjpris (kr)", widget: number, value_type: int, required: false }
       - { name: image, label: Produktbild, widget: image, required: false }
       - { name: excerpt, label: Kort beskrivning, widget: text }
+      - { name: warranty, label: Garanti, widget: string, required: false, hint: "t.ex. 5 år" }
       - { name: energyClass, label: Energiklass, widget: string, required: false, hint: "t.ex. A+++" }
       - { name: scop, label: SCOP, widget: number, value_type: float, step: 0.1, required: false }
       - { name: heatingCapacity, label: Värmeeffekt, widget: string, required: false, hint: "t.ex. 0,9–6,5 kW" }

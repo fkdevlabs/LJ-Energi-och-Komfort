@@ -131,9 +131,10 @@
         );
       }
 
-      function SettingsPreview({ entry }: any) {
+      function SettingsPreview({ entry, getAsset }: any) {
         const d = toJS(entry.get('data')) || {};
         const hero = d.hero || {};
+        const decl = d.declaration || {};
         const title: string = hero.title || '';
         const hl: string = hero.highlight || '';
         const parts = hl && title.includes(hl) ? title.split(hl) : [title];
@@ -143,12 +144,12 @@
           h('section', { className: 'hero' },
             h('div', { className: 'container hero__inner' },
               h('div', { className: 'hero__text' },
-                h('span', { className: 'hero__eyebrow' }, 'Försäljning · Rådgivning · Service'),
+                hero.eyebrow && h('span', { className: 'hero__eyebrow' }, hero.eyebrow),
                 h('h1', null, parts[0], parts.length > 1 && [h('mark', { key: 'm' }, hl), parts.slice(1).join(hl)]),
                 h('p', { className: 'hero__lead' }, hero.text),
                 h('div', { className: 'hero__actions' },
                   h('a', { className: 'btn btn--light' }, `${button} →`),
-                  h('a', { className: 'btn btn--ghost' }, 'Se värmepumpar'),
+                  h('a', { className: 'btn btn--ghost' }, 'Energideklaration'),
                 ),
                 h('dl', { className: 'hero__stats' },
                   (d.stats || []).map((s: any, i: number) => h('div', { key: i }, h('dt', null, s.value), h('dd', null, s.label))),
@@ -177,6 +178,24 @@
           ),
           h('section', { className: 'section' },
             h('div', { className: 'container' },
+              h('span', { className: 'eyebrow' }, decl.title),
+              h('h2', null, 'Ska du bygga, sälja eller köpa?'),
+              h('p', { className: 'lead' }, decl.intro),
+              h('div', { className: 'grid grid--3 cases' },
+                (decl.cases || []).map((c: any, i: number) => h('a', { className: 'card case', key: i },
+                  c.image && h('img', { src: String(getAsset(c.image)), alt: '' }),
+                  h('div', { className: 'case__body' },
+                    h('h3', null, c.title),
+                    h('p', null, c.text),
+                    h('span', { className: 'case__more' }, 'Läs mer →'),
+                  ),
+                )),
+              ),
+            ),
+          ),
+          h('p', { className: 'container pv-label', style: { paddingTop: '1rem' } }, '(Populära värmepumpar visas här på startsidan)'),
+          h('section', { className: 'section' },
+            h('div', { className: 'container' },
               h('span', { className: 'eyebrow' }, 'Enkelt från start till mål'),
               h('h2', null, 'Så går det till'),
               h('ol', { className: 'steps' },
@@ -202,8 +221,8 @@
           h('section', { className: 'cta' },
             h('div', { className: 'container cta__inner' },
               h('div', null,
-                h('h2', null, 'Redo att sänka din elräkning?'),
-                h('p', null, 'Kostnadsfri offert – helt utan förpliktelser.'),
+                h('h2', null, 'Har du frågor eller vill boka oss?'),
+                h('p', null, `Fyll i formuläret eller ring oss på ${d.phone || ''}.`),
               ),
               h('a', { className: 'btn' }, `${button} →`),
             ),

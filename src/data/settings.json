@@ -1,49 +1,18 @@
 {
-  "companyName": "LJ Energi och Komfort",
-  "tagline": "Värmepumpar som sänker dina energikostnader",
-  "phone": "070-000 00 00",
+  "companyName": "LJ Energi & Komfort",
+  "tagline": "Vi hjälper dig med allt inom energifrågor",
+  "phone": "0293-105 14",
   "email": "info@ljenergi.se",
   "address": "Exempelgatan 1, 123 45 Ort",
   "orgNumber": "000000-0000",
   "serviceArea": "Vi levererar i hela regionen",
   "hero": {
-    "title": "Sänk din värmekostnad med upp till 50 %",
-    "text": "Vi säljer och servar luftvärmepumpar från ledande tillverkare. Fast pris, personlig rådgivning och trygg garanti.",
-    "buttonText": "Få kostnadsfri offert",
-    "highlight": "upp till 50 %"
+    "eyebrow": "Energideklaration · Värmepumpar · Solceller",
+    "title": "Energisäkra din fastighet",
+    "highlight": "din fastighet",
+    "text": "Vi hjälper dig med allt inom energifrågor – från energideklarationer och energibalansberäkningar till värmepumpar, ventilationsanläggningar och solceller.",
+    "buttonText": "Kontakta oss"
   },
-  "usps": [
-    {
-      "title": "Ledande tillverkare",
-      "text": "Vi säljer endast beprövade värmepumpar byggda för nordiskt klimat."
-    },
-    {
-      "title": "Fast pris",
-      "text": "Inga överraskningar – du vet exakt vad det kostar."
-    },
-    {
-      "title": "Personlig rådgivning",
-      "text": "Vi hjälper dig att välja rätt pump för ditt hus och dina behov."
-    },
-    {
-      "title": "Service & support",
-      "text": "Vi finns kvar efter köpet med service och garanti."
-    }
-  ],
-  "faq": [
-    {
-      "question": "Hur mycket kan jag spara med en luftvärmepump?",
-      "answer": "Det beror på ditt hus och nuvarande uppvärmning, men många hushåll med direktverkande el sänker sin uppvärmningskostnad med 30–50 %."
-    },
-    {
-      "question": "Fungerar en luftvärmepump när det är riktigt kallt ute?",
-      "answer": "Ja. Moderna nordiska modeller är byggda för svenska vintrar och levererar värme ner till -25 °C eller lägre."
-    },
-    {
-      "question": "Vilken garanti ingår?",
-      "answer": "Alla värmepumpar levereras med 5 års garanti. Vi hjälper dig om något skulle krångla."
-    }
-  ],
   "stats": [
     {
       "value": "−50 %",
@@ -56,6 +25,73 @@
     {
       "value": "5 år",
       "label": "garanti"
+    }
+  ],
+  "usps": [
+    {
+      "title": "Energideklaration",
+      "text": "När du bygger nytt, säljer eller köper en fastighet – vi upprättar energideklarationen åt dig."
+    },
+    {
+      "title": "Energibalansberäkning",
+      "text": "Beräkning av byggnadens energibehov, som ofta krävs vid nybyggnation."
+    },
+    {
+      "title": "Värmepumpar",
+      "text": "Luftvärmepumpar från ledande tillverkare som sänker dina energikostnader."
+    },
+    {
+      "title": "Ventilation & solceller",
+      "text": "Ventilationsanläggningar och solceller för ett energisnålare hem."
+    }
+  ],
+  "declaration": {
+    "title": "Energideklaration",
+    "intro": "Oavsett om du ska bygga nytt, sälja eller köpa en fastighet hjälper vi dig med energideklarationen.",
+    "cases": [
+      {
+        "id": "bygga",
+        "title": "Om du ska bygga nytt",
+        "image": "/images/site/bygga.jpg",
+        "text": "Ska du bygga nytt? Då behövs en energideklaration och ofta också en energibalansberäkning. Detta kan vi på LJ Energi & Komfort hjälpa dig med. Vid nyproduktion kan det förekomma lokala bestämmelser. Ta reda på vad som gäller i din kommun, eller fråga oss så hjälper vi dig!",
+        "quote": "Alla uppförda nya byggnader ska ha en energideklaration. Det är alltid byggherren som ansvarar för att dessa byggnader energideklareras. En energideklaration ska upprättas senast två år efter det att byggnaden har tagits i bruk. Om byggnaden upplåts med nyttjanderätt eller säljs inom två år så ska energideklarationen upprättas vid denna tidpunkt."
+      },
+      {
+        "id": "salja",
+        "title": "Om du ska sälja en fastighet",
+        "image": "/images/site/salja.jpg",
+        "text": "Ska man sälja en fastighet måste det upprättas en energideklaration. Detta hjälper vi dig med.",
+        "quote": "En energideklaration visar bland annat information om byggnadens energianvändning vilket kan underlätta för den intresserade köparen att beräkna kostnaderna för uppvärmningen. Energideklarationen ingår därför som en del av det underlag som en intresserad köpare har för att ta ställning till om denne vill köpa byggnaden eller inte. Ska du sälja ditt hus är du enligt lag skyldig att göra en energideklaration."
+      },
+      {
+        "id": "kopa",
+        "title": "Eller om du ska köpa",
+        "image": "/images/site/kopa.jpg",
+        "text": "Ska du köpa en fastighet är det bra att fastigheten i fråga har en energideklaration, så att du vet vad du köper. Har fastigheten ingen energideklaration kan du alltid upprätta en energideklaration på eget initiativ. Hör av er till oss så hjälper vi dig.",
+        "quote": "Om inte säljaren har upprättat en energideklaration vid försäljningstidpunkten har köparen, efter att denne uppmanat säljaren om att upprätta en energideklaration, rätt att på egen bekostnad låta upprätta en energideklaration inom sex månader efter tillträdet av byggnaden och därefter kräva att säljaren bekostar denna energideklaration."
+      }
+    ]
+  },
+  "faq": [
+    {
+      "question": "Behöver jag en energideklaration?",
+      "answer": "Ja, om du bygger nytt eller ska sälja ditt hus. Nya byggnader ska energideklareras senast två år efter att de tagits i bruk, och vid försäljning är du enligt lag skyldig att ha en energideklaration."
+    },
+    {
+      "question": "Vad är en energibalansberäkning?",
+      "answer": "En beräkning av byggnadens förväntade energianvändning. Den behövs ofta vid nybyggnation. Det kan också finnas lokala bestämmelser i din kommun – fråga oss så hjälper vi dig."
+    },
+    {
+      "question": "Hur mycket kan jag spara med en luftvärmepump?",
+      "answer": "Det beror på ditt hus och nuvarande uppvärmning, men många hushåll med direktverkande el sänker sin uppvärmningskostnad med 30–50 %."
+    },
+    {
+      "question": "Fungerar en luftvärmepump när det är riktigt kallt ute?",
+      "answer": "Ja. Moderna nordiska modeller är byggda för svenska vintrar och levererar värme ner till -25 °C eller lägre."
+    },
+    {
+      "question": "Vilken garanti ingår?",
+      "answer": "Alla värmepumpar levereras med 5 års garanti. Vi hjälper dig om något skulle krångla."
     }
   ]
 }

@@ -18,12 +18,12 @@ const [before, after] = highlight && title.includes(highlight) ? title.split(hig
   <section class="hero">
     <div class="container hero__inner">
       <div class="hero__text">
-        <span class="hero__eyebrow">Försäljning · Rådgivning · Service</span>
+        {settings.hero.eyebrow && <span class="hero__eyebrow">{settings.hero.eyebrow}</span>}
         <h1>{before}{after !== undefined && <><mark>{highlight}</mark>{after}</>}</h1>
         <p class="hero__lead">{settings.hero.text}</p>
         <div class="hero__actions">
           <a href="/kontakt/" class="btn btn--light">{settings.hero.buttonText} →</a>
-          <a href="/produkter/" class="btn btn--ghost">Se värmepumpar</a>
+          <a href="/energideklaration/" class="btn btn--ghost">Energideklaration</a>
         </div>
         <dl class="hero__stats">
           {settings.stats.map((s) => <div><dt>{s.value}</dt><dd>{s.label}</dd></div>)}
@@ -45,6 +45,26 @@ const [before, after] = highlight && title.includes(highlight) ? title.split(hig
           <p>{u.text}</p>
         </div>
       ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">{settings.declaration.title}</span>
+      <h2>Ska du bygga, sälja eller köpa?</h2>
+      <p class="lead">{settings.declaration.intro}</p>
+      <div class="grid grid--3 cases">
+        {settings.declaration.cases.map((c) => (
+          <a href={`/energideklaration/#${c.id}`} class="card case">
+            <img src={c.image} alt="" loading="lazy" width="460" height="300" />
+            <div class="case__body">
+              <h3>{c.title}</h3>
+              <p>{c.text}</p>
+              <span class="case__more">Läs mer →</span>
+            </div>
+          </a>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -94,8 +114,8 @@ const [before, after] = highlight && title.includes(highlight) ? title.split(hig
   <section class="cta">
     <div class="container cta__inner">
       <div>
-        <h2>Redo att sänka din elräkning?</h2>
-        <p>Kostnadsfri offert – helt utan förpliktelser.</p>
+        <h2>Har du frågor eller vill boka oss?</h2>
+        <p>Fyll i formuläret eller ring oss på {settings.phone}.</p>
       </div>
       <a href="/kontakt/" class="btn">{settings.hero.buttonText} →</a>
     </div>

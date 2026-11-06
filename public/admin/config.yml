@@ -63,6 +63,7 @@ collections:
             label: Startsida – toppsektion
             widget: object
             fields:
+              - { name: eyebrow, label: "Liten text ovanför rubriken", widget: string, required: false }
               - { name: title, label: Rubrik, widget: string }
               - { name: highlight, label: "Markerad del av rubriken", widget: string, required: false, hint: "Måste finnas ordagrant i rubriken, visas i ljusgrönt" }
               - { name: text, label: Text, widget: text }
@@ -80,6 +81,22 @@ collections:
             fields:
               - { name: title, label: Rubrik, widget: string }
               - { name: text, label: Text, widget: text }
+          - name: declaration
+            label: Energideklaration (startsida + egen sida)
+            widget: object
+            fields:
+              - { name: title, label: Rubrik, widget: string }
+              - { name: intro, label: Ingress, widget: text }
+              - name: cases
+                label: Situationer
+                widget: list
+                summary: "{{fields.title}}"
+                fields:
+                  - { name: id, label: "ID (används i länkar, t.ex. salja)", widget: string }
+                  - { name: title, label: Rubrik, widget: string }
+                  - { name: image, label: Bild, widget: image }
+                  - { name: text, label: Text, widget: text }
+                  - { name: quote, label: "Citat från Boverket", widget: text, required: false }
           - name: faq
             label: Vanliga frågor
             widget: list

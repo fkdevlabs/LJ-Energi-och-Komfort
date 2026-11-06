@@ -3,6 +3,7 @@ import settings from '../data/settings.json';
 const path = Astro.url.pathname;
 const links = [
   { href: '/', label: 'Hem' },
+  { href: '/energideklaration/', label: 'Energideklaration' },
   { href: '/produkter/', label: 'Värmepumpar' },
   { href: '/om-oss/', label: 'Om oss' },
   { href: '/kontakt/', label: 'Kontakt' },
@@ -12,15 +13,14 @@ const tel = settings.phone.replace(/[^\d+]/g, '');
 ---
 <div class="topbar">
   <div class="container topbar__inner">
-    <span>★ Fast pris · Personlig rådgivning</span>
+    <span>Energideklarationer · Energibalansberäkningar · Värmepumpar · Solceller</span>
     <a href={`tel:${tel}`}>{settings.phone}</a>
   </div>
 </div>
 <header class="header">
   <div class="container header__inner">
     <a href="/" class="logo">
-      <img src="/favicon.svg" alt="" width="36" height="36" />
-      <span>{settings.companyName}</span>
+      <img src="/images/site/logo.png" alt={settings.companyName} width="260" height="28" />
     </a>
     <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Öppna meny" />
     <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span></label>
@@ -28,7 +28,7 @@ const tel = settings.phone.replace(/[^\d+]/g, '');
       {links.map((l) => (
         <a href={l.href} class:list={{ active: isActive(l.href) }}>{l.label}</a>
       ))}
-      <a href="/kontakt/" class="btn nav__cta">Få offert</a>
+      <a href="/kontakt/" class="btn nav__cta">Kontakta oss</a>
     </nav>
   </div>
 </header>
@@ -41,6 +41,7 @@ const tel = settings.phone.replace(/[^\d+]/g, '');
 
   .header { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--c-border); }
   .header__inner { display: flex; align-items: center; justify-content: space-between; min-height: 76px; }
+  .logo img { width: clamp(180px, 22vw, 260px); height: auto; }
   .logo { display: flex; align-items: center; gap: .7rem; font: 700 1.2rem/1 var(--f-head); letter-spacing: -.01em; color: var(--c-ink); text-decoration: none; }
   .nav { display: flex; align-items: center; gap: 2rem; }
   .nav a:not(.btn) { color: var(--c-ink); text-decoration: none; font-weight: 500; position: relative; }

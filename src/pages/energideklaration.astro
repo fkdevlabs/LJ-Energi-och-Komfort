@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import settings from '../data/settings.json';
+const d = settings.declaration;
+---
+<Base title={d.title} description={d.intro}>
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">Energideklaration & energibalansberäkning</span>
+      <h1>{d.title}</h1>
+      <p class="lead">{d.intro}</p>
+
+      {d.cases.map((c, i) => (
+        <article id={c.id} class:list={['decl', { 'decl--flip': i % 2 === 1 }]}>
+          <img src={c.image} alt="" width="920" height="620" class="card" loading={i === 0 ? 'eager' : 'lazy'} />
+          <div>
+            <h2>{c.title}</h2>
+            <p>{c.text}</p>
+            {c.quote && (
+              <blockquote>
+                <span>Boverket skriver:</span>
+                <p>”{c.quote}”</p>
+              </blockquote>
+            )}
+            <a href={`/kontakt/?arende=Energideklaration`} class="btn">Kontakta oss</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .decl { display: grid; gap: 3rem; grid-template-columns: 1fr 1.1fr; align-items: center; margin-top: clamp(3rem, 7vw, 5rem); scroll-margin-top: 110px; }
+  .decl--flip > img { order: 2; }
+  .decl img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; padding: 0; }
+  .decl p { color: var(--c-muted); }
+  blockquote { margin: 1.5rem 0 2rem; padding: 1.25rem 1.5rem; border-left: 4px solid var(--c-green); background: var(--c-soft); border-radius: 0 12px 12px 0; }
+  blockquote span { font-weight: 700; font-size: .85rem; letter-spacing: .06em; text-transform: uppercase; color: var(--c-green); }
+  blockquote p { margin: .5rem 0 0; font-style: italic; }
+  @media (max-width: 860px) { .decl { grid-template-columns: 1fr; gap: 1.5rem; } .decl--flip > img { order: 0; } }
+</style>

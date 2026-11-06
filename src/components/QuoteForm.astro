@@ -17,8 +17,13 @@ const { selected } = Astro.props;
     <label>E-post *<input type="email" name="epost" required autocomplete="email" /></label>
     <label>Postnummer *<input type="text" name="postnummer" required autocomplete="postal-code" inputmode="numeric" /></label>
   </div>
+  <label>Ärende
+    <select name="arende" id="quote-arende">
+      {['Energideklaration', 'Energibalansberäkning', 'Värmepump', 'Ventilation', 'Solceller', 'Annat'].map((a) => <option>{a}</option>)}
+    </select>
+  </label>
   <div class="quote__row">
-    <label>Intresserad av
+    <label>Intresserad av värmepump
       <select name="produkt" id="quote-product">
         <option value="Vet inte – vill ha rådgivning">Vet inte – vill ha rådgivning</option>
         {products.map((p) => (
@@ -40,13 +45,16 @@ const { selected } = Astro.props;
   </label>
   <label>Meddelande<textarea name="meddelande" rows="4"></textarea></label>
   <label class="quote__consent"><input type="checkbox" name="samtycke" required /> Jag godkänner att mina uppgifter sparas för att kunna besvara min förfrågan.</label>
-  <button type="submit" class="btn">Skicka offertförfrågan</button>
+  <button type="submit" class="btn">Skicka</button>
 </form>
 
 <script is:inline>
-  // Förvälj produkt via ?produkt=slug
+  // Förvälj ärende via ?arende=... och produkt via ?produkt=slug
   (function () {
-    var slug = new URLSearchParams(location.search).get('produkt');
+    var q = new URLSearchParams(location.search);
+    var arende = q.get('arende'), slug = q.get('produkt');
+    if (slug) arende = arende || 'Värmepump';
+    if (arende) document.getElementById('quote-arende').value = arende;
     if (!slug) return;
     var opt = document.querySelector('#quote-product option[data-slug="' + CSS.escape(slug) + '"]');
     if (opt) opt.selected = true;

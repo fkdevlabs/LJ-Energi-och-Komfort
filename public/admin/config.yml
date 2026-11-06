@@ -29,7 +29,7 @@ collections:
       - { name: title, label: Produktnamn, widget: string }
       - { name: brand, label: Märke, widget: string }
       - { name: type, label: Typ, widget: select, options: ["Luft/luft", "Luft/vatten"], default: "Luft/luft" }
-      - { name: price, label: "Pris inkl. installation (kr)", widget: number, value_type: int }
+      - { name: price, label: "Pris inkl. moms (kr)", widget: number, value_type: int }
       - { name: campaignPrice, label: "Kampanjpris (kr)", widget: number, value_type: int, required: false }
       - { name: image, label: Produktbild, widget: image, required: false }
       - { name: excerpt, label: Kort beskrivning, widget: text }
@@ -64,7 +64,7 @@ collections:
             widget: object
             fields:
               - { name: title, label: Rubrik, widget: string }
-              - { name: highlight, label: "Markerad del av rubriken", widget: string, required: false, hint: "Måste finnas ordagrant i rubriken, visas i gult" }
+              - { name: highlight, label: "Markerad del av rubriken", widget: string, required: false, hint: "Måste finnas ordagrant i rubriken, visas i ljusgrönt" }
               - { name: text, label: Text, widget: text }
               - { name: buttonText, label: Knapptext, widget: string }
           - name: stats

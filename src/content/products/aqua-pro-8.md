@@ -21,4 +21,4 @@ order: 3
 
 **Aqua Pro 8** kopplas till husets vattenburna system och ger både värme och varmvatten. Ett bra alternativ när den gamla pannan ska bytas ut.
 
-Priset inkluderar komplett installation med inomhusmodul. Exakt pris lämnas efter platsbesök.
+Priset inkluderar inomhusmodul.

@@ -6,11 +6,11 @@ import ProductCard from '../../components/ProductCard.astro';
 const products = (await getCollection('products')).sort((a, b) => a.data.order - b.data.order);
 const types = ['Luft/luft', 'Luft/vatten'] as const;
 ---
-<Base title="Värmepumpar" description="Luft/luft- och luft/vatten-värmepumpar med fast pris inklusive installation.">
+<Base title="Värmepumpar" description="Luft/luft- och luft/vatten-värmepumpar med fast pris.">
   <section class="section">
     <div class="container">
       <h1>Våra värmepumpar</h1>
-      <p class="lead">Alla priser inkluderar standardinstallation. ROT-avdrag dras direkt på fakturan.</p>
+      <p class="lead">Alla priser är fasta och inkluderar moms.</p>
       {types.map((t) => {
         const list = products.filter((p) => p.data.type === t);
         return list.length > 0 && (

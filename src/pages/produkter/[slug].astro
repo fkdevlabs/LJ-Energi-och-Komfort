@@ -40,10 +40,10 @@ const specs = [
             ) : (
               <strong>{formatPrice(p.price)}</strong>
             )}
-            <small>inkl. standardinstallation, efter ROT-avdrag</small>
+            <small>inkl. moms</small>
           </div>
           <p class={p.inStock ? 'stock stock--yes' : 'stock stock--no'}>
-            {p.inStock ? '● I lager – installation inom kort' : '● Beställningsvara'}
+            {p.inStock ? '● I lager – snabb leverans' : '● Beställningsvara'}
           </p>
           {p.features.length > 0 && (
             <ul class="features">{p.features.map((f) => <li>{f}</li>)}</ul>
@@ -70,7 +70,7 @@ const specs = [
 <style>
   .back { display: inline-block; margin-bottom: 1.5rem; text-decoration: none; }
   .detail { display: grid; gap: 2.5rem; grid-template-columns: 1fr 1fr; align-items: start; }
-  .detail img { width: 100%; padding: 2rem; background: linear-gradient(180deg, #f7f4f1, #efe9e4); }
+  .detail img { width: 100%; padding: 2rem; background: linear-gradient(180deg, #f2f8f4, #e3f0e7); }
   .detail h1 { margin-top: .75rem; }
   .detail .badge + .badge { margin-left: .4rem; }
   .price { display: flex; flex-direction: column; margin: 1rem 0; }

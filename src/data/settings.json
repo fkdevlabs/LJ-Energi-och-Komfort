@@ -3,9 +3,9 @@
   "tagline": "Vi hjälper dig med allt inom energifrågor",
   "phone": "0293-105 14",
   "email": "info@ljenergi.se",
-  "address": "Exempelgatan 1, 123 45 Ort",
-  "orgNumber": "000000-0000",
-  "serviceArea": "Vi levererar i hela regionen",
+  "address": "Södra Esplanaden 7B, 815 30 Tierp",
+  "orgNumber": "559188-7269",
+  "serviceArea": "Vi levererar i hela Uppland och Gävleborgs län",
   "hero": {
     "eyebrow": "Energideklaration · Värmepumpar · Solceller",
     "title": "Energisäkra din fastighet",
@@ -19,7 +19,7 @@
       "label": "lägre värmekostnad"
     },
     {
-      "value": "24 h",
+      "value": "48 h",
       "label": "svar på offert"
     },
     {

@@ -12,6 +12,7 @@ const products = defineCollection({
     campaignPrice: z.number().optional(),
     image: z.string().default('/images/placeholder-heatpump.svg'),
     excerpt: z.string(),
+    warranty: z.string().optional(),
     energyClass: z.string().optional(),
     scop: z.number().optional(),
     heatingCapacity: z.string().optional(),

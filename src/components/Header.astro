@@ -12,7 +12,7 @@ const tel = settings.phone.replace(/[^\d+]/g, '');
 ---
 <div class="topbar">
   <div class="container topbar__inner">
-    <span>★ Fast pris inkl. installation · ROT-avdrag direkt på fakturan</span>
+    <span>★ Fast pris · Personlig rådgivning</span>
     <a href={`tel:${tel}`}>{settings.phone}</a>
   </div>
 </div>
@@ -34,9 +34,9 @@ const tel = settings.phone.replace(/[^\d+]/g, '');
 </header>
 
 <style>
-  .topbar { background: var(--c-ink); color: #f2e9e6; font-size: .85rem; }
+  .topbar { background: var(--c-green-deep); color: #e6f2ea; font-size: .85rem; }
   .topbar__inner { display: flex; justify-content: space-between; gap: 1rem; padding: .5rem 0; }
-  .topbar a { color: var(--c-yellow); font-weight: 600; text-decoration: none; }
+  .topbar a { color: var(--c-mint); font-weight: 600; text-decoration: none; }
   @media (max-width: 640px) { .topbar__inner span { display: none; } .topbar__inner { justify-content: center; } }
 
   .header { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--c-border); }
@@ -44,7 +44,7 @@ const tel = settings.phone.replace(/[^\d+]/g, '');
   .logo { display: flex; align-items: center; gap: .7rem; font: 700 1.2rem/1 var(--f-head); letter-spacing: -.01em; color: var(--c-ink); text-decoration: none; }
   .nav { display: flex; align-items: center; gap: 2rem; }
   .nav a:not(.btn) { color: var(--c-ink); text-decoration: none; font-weight: 500; position: relative; }
-  .nav a:not(.btn)::after { content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 3px; border-radius: 2px; background: var(--c-yellow); transform: scaleX(0); transition: transform .2s; }
+  .nav a:not(.btn)::after { content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 3px; border-radius: 2px; background: var(--c-green); transform: scaleX(0); transition: transform .2s; }
   .nav a.active::after, .nav a:not(.btn):hover::after { transform: scaleX(1); }
   .nav__cta { padding: .75rem 1.3rem; }
   .nav-toggle, .nav-burger { display: none; }

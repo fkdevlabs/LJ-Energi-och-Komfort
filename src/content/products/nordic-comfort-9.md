@@ -21,5 +21,3 @@ order: 1
 ---
 
 **Nordic Comfort 9** är ett tryggt val för dig som vill sänka elräkningen utan att kompromissa med komforten.
-
-Priset inkluderar standardinstallation (upp till 3 m rördragning), idrifttagning och genomgång av styrningen. ROT-avdrag dras av på arbetskostnaden.

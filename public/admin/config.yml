@@ -60,28 +60,30 @@ collections:
           - { name: address, label: Adress, widget: string }
           - { name: orgNumber, label: Organisationsnummer, widget: string }
           - { name: serviceArea, label: Serviceområde, widget: string }
+          - { name: location, label: "Ort (visas i toppraden)", widget: string, required: false }
+          - { name: topbar, label: "Punkter i toppraden", widget: list, field: { name: item, label: Punkt, widget: string }, required: false }
           - name: hero
             label: Startsida – toppsektion
             widget: object
             fields:
               - { name: eyebrow, label: "Liten text ovanför rubriken", widget: string, required: false }
               - { name: title, label: Rubrik, widget: string }
-              - { name: highlight, label: "Markerad del av rubriken", widget: string, required: false, hint: "Måste finnas ordagrant i rubriken, visas i ljusgrönt" }
+              - { name: highlight, label: "Markerad del av rubriken", widget: string, required: false, hint: "Måste finnas ordagrant i rubriken, visas i ljusgrönt. Lämna tomt för ingen markering." }
               - { name: text, label: Text, widget: text }
-              - { name: buttonText, label: Knapptext, widget: string }
-          - name: stats
-            label: Siffror i toppsektionen
+              - { name: image, label: Bakgrundsbild, widget: image, required: false, hint: "Liggande foto, gärna minst 1920 px brett. Motivet bör ligga till höger." }
+              - { name: buttonText, label: "Knapp 1 – text", widget: string }
+              - { name: buttonLink, label: "Knapp 1 – länk", widget: string, default: "/produkter/" }
+              - { name: secondaryText, label: "Knapp 2 – text", widget: string, required: false }
+              - { name: secondaryLink, label: "Knapp 2 – länk", widget: string, required: false, default: "/kontakt/" }
+          - name: services
+            label: Tjänstekort (under toppsektionen)
             widget: list
-            max: 4
-            fields:
-              - { name: value, label: Värde, widget: string }
-              - { name: label, label: Beskrivning, widget: string }
-          - name: usps
-            label: Säljargument
-            widget: list
+            summary: "{{fields.title}}"
             fields:
               - { name: title, label: Rubrik, widget: string }
-              - { name: text, label: Text, widget: text }
+              - { name: text, label: Text, widget: string }
+              - { name: icon, label: Ikon, widget: select, options: [snowflake, drop, document, wrench, wind, sun, house, bolt] }
+              - { name: link, label: Länk, widget: string, hint: "t.ex. /produkter/ eller /kontakt/?arende=Ventilation" }
           - name: declaration
             label: Energideklaration (startsida + egen sida)
             widget: object

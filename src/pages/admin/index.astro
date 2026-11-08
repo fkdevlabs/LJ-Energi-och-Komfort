@@ -20,7 +20,7 @@
       import globalCss from '../../styles/global.css?inline';
       import productCss from '../../styles/product.css?inline';
       import homeCss from '../../styles/home.css?inline';
-      import { formatPrice, uspIcons, steps } from '../../lib';
+      import { formatPrice, serviceIcon, steps } from '../../lib';
 
       const CMS = (window as any).CMS;
       const h = (window as any).h;
@@ -138,10 +138,11 @@
         const title: string = hero.title || '';
         const hl: string = hero.highlight || '';
         const parts = hl && title.includes(hl) ? title.split(hl) : [title];
-        const button = hero.buttonText || 'Få kostnadsfri offert';
+        const button = hero.buttonText || 'Se våra värmepumpar';
 
         return h('div', null,
           h('section', { className: 'hero' },
+            hero.image && h('img', { className: 'hero__bg', src: String(getAsset(hero.image)), alt: '' }),
             h('div', { className: 'container hero__inner' },
               h('div', { className: 'hero__text' },
                 hero.eyebrow && h('span', { className: 'hero__eyebrow' }, hero.eyebrow),
@@ -149,30 +150,17 @@
                 h('p', { className: 'hero__lead' }, hero.text),
                 h('div', { className: 'hero__actions' },
                   h('a', { className: 'btn btn--light' }, `${button} →`),
-                  h('a', { className: 'btn btn--ghost' }, 'Energideklaration'),
+                  hero.secondaryText && h('a', { className: 'btn btn--ghost' }, hero.secondaryText),
                 ),
-                h('dl', { className: 'hero__stats' },
-                  (d.stats || []).map((s: any, i: number) => h('div', { key: i }, h('dt', null, s.value), h('dd', null, s.label))),
-                ),
-              ),
-              h('div', { className: 'hero__visual', 'aria-hidden': true },
-                h('div', { className: 'hero__blob' }),
-                h('img', { src: PLACEHOLDER, alt: '' }),
               ),
             ),
           ),
-          h('section', { className: 'section usps-wrap' },
-            h('div', { className: 'container grid grid--4 usps' },
-              (d.usps || []).map((u: any, i: number) => h('div', { className: 'usp', key: i },
-                h('span', { className: 'usp__icon' },
-                  h('svg', {
-                    viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2,
-                    strokeLinecap: 'round', strokeLinejoin: 'round',
-                    dangerouslySetInnerHTML: { __html: uspIcons[i % uspIcons.length] },
-                  }),
-                ),
-                h('h3', null, u.title),
-                h('p', null, u.text),
+          h('section', { className: 'services-wrap' },
+            h('div', { className: 'container services' },
+              (d.services || []).map((sv: any, i: number) => h('a', { className: 'service', key: i },
+                h('span', { className: 'service__icon' }, h('svg', { viewBox: '0 0 24 24', 'aria-hidden': true, dangerouslySetInnerHTML: { __html: serviceIcon(sv.icon) } })),
+                h('span', { className: 'service__body' }, h('b', null, sv.title), h('span', null, sv.text)),
+                h('svg', { className: 'service__arrow', viewBox: '0 0 24 24', dangerouslySetInnerHTML: { __html: '<path d="M7 17 17 7M8 7h9v9"/>' } }),
               )),
             ),
           ),

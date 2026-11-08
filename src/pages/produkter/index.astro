@@ -14,7 +14,7 @@ const types = ['Luft/luft', 'Luft/vatten'] as const;
       {types.map((t) => {
         const list = products.filter((p) => p.data.type === t);
         return list.length > 0 && (
-          <section class="group">
+          <section class="group" id={t.toLowerCase().replace("/", "-")}>
             <h2>{t}-värmepumpar</h2>
             <div class="grid grid--3">
               {list.map((p) => <ProductCard product={p} />)}

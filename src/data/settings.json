@@ -6,43 +6,59 @@
   "address": "Södra Esplanaden 7B, 815 30 Tierp",
   "orgNumber": "559188-7269",
   "serviceArea": "Vi arbetar i Uppsala län och Gävleborgs län",
-  "hero": {
-    "eyebrow": "Energideklaration · Värmepumpar · Solceller",
-    "title": "Energisäkra din fastighet",
-    "highlight": "din fastighet",
-    "text": "Vi hjälper dig med allt inom energifrågor – från energideklarationer och energibalansberäkningar till värmepumpar, ventilationsanläggningar och solceller.",
-    "buttonText": "Kontakta oss"
-  },
-  "stats": [
-    {
-      "value": "−50 %",
-      "label": "lägre värmekostnad"
-    },
-    {
-      "value": "48 h",
-      "label": "svar på offert"
-    },
-    {
-      "value": "5 år",
-      "label": "garanti"
-    }
+  "location": "Tierp med omnejd",
+  "topbar": [
+    "Värmepumpar",
+    "Energideklarationer",
+    "Service & reparationer"
   ],
-  "usps": [
+  "hero": {
+    "eyebrow": "Värmepumpar i Tierp med omnejd",
+    "title": "Smarta energilösningar för ett bekvämare hem",
+    "highlight": "",
+    "text": "Värmepumpar, installation och energitjänster med personlig service.",
+    "image": "/images/site/salja.jpg",
+    "buttonText": "Se våra värmepumpar",
+    "buttonLink": "/produkter/",
+    "secondaryText": "Begär offert",
+    "secondaryLink": "/kontakt/"
+  },
+  "services": [
     {
-      "title": "Energideklaration",
-      "text": "När du bygger nytt, säljer eller köper en fastighet – vi upprättar energideklarationen åt dig."
+      "title": "Luftvärmepumpar",
+      "text": "Prisvärd värme vintertid – och svalka på sommaren.",
+      "icon": "snowflake",
+      "link": "/produkter/#luft-luft"
     },
     {
-      "title": "Energibalansberäkning",
-      "text": "Beräkning av byggnadens energibehov, som ofta krävs vid nybyggnation."
+      "title": "Luft/vattenvärmepumpar",
+      "text": "Värme och varmvatten via ditt vattenburna system.",
+      "icon": "drop",
+      "link": "/produkter/#luft-vatten"
     },
     {
-      "title": "Värmepumpar",
-      "text": "Luftvärmepumpar från ledande tillverkare som sänker dina energikostnader."
+      "title": "Energideklarationer",
+      "text": "När du bygger nytt, säljer eller köper.",
+      "icon": "document",
+      "link": "/energideklaration/"
     },
     {
-      "title": "Ventilation & solceller",
-      "text": "Ventilationsanläggningar och solceller för ett energisnålare hem."
+      "title": "Service och reparationer",
+      "text": "Felsökning, reparation och underhåll.",
+      "icon": "wrench",
+      "link": "/kontakt/?arende=Service och reparation"
+    },
+    {
+      "title": "Ventilation",
+      "text": "Montering av ventilationsanläggningar.",
+      "icon": "wind",
+      "link": "/kontakt/?arende=Ventilation"
+    },
+    {
+      "title": "Solceller",
+      "text": "Solcellsanläggningar för ett energisnålare hem.",
+      "icon": "sun",
+      "link": "/kontakt/?arende=Solceller"
     }
   ],
   "declaration": {

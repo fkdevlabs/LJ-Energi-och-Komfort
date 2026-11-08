@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import ProductCard from '../components/ProductCard.astro';
 import settings from '../data/settings.json';
-import { uspIcons as icons, steps } from '../lib';
+import { serviceIcon, steps } from '../lib';
 import '../styles/home.css';
 
 const featured = (await getCollection('products', ({ data }) => data.featured))
@@ -16,34 +16,33 @@ const [before, after] = highlight && title.includes(highlight) ? title.split(hig
 ---
 <Base>
   <section class="hero">
+    {settings.hero.image && <img class="hero__bg" src={settings.hero.image} alt="" fetchpriority="high" />}
     <div class="container hero__inner">
       <div class="hero__text">
-        {settings.hero.eyebrow && <span class="hero__eyebrow">{settings.hero.eyebrow}</span>}
+        {settings.hero.eyebrow && (
+          <span class="hero__eyebrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>{settings.hero.eyebrow}</span>
+        )}
         <h1>{before}{after !== undefined && <><mark>{highlight}</mark>{after}</>}</h1>
         <p class="hero__lead">{settings.hero.text}</p>
         <div class="hero__actions">
-          <a href="/kontakt/" class="btn btn--light">{settings.hero.buttonText} →</a>
-          <a href="/energideklaration/" class="btn btn--ghost">Energideklaration</a>
+          <a href={settings.hero.buttonLink || '/produkter/'} class="btn btn--light">{settings.hero.buttonText} <span aria-hidden="true">→</span></a>
+          {settings.hero.secondaryText && <a href={settings.hero.secondaryLink || '/kontakt/'} class="btn btn--ghost">{settings.hero.secondaryText}</a>}
         </div>
-        <dl class="hero__stats">
-          {settings.stats.map((s) => <div><dt>{s.value}</dt><dd>{s.label}</dd></div>)}
-        </dl>
-      </div>
-      <div class="hero__visual" aria-hidden="true">
-        <div class="hero__blob"></div>
-        <img src="/images/placeholder-heatpump.svg" alt="" width="400" height="300" />
       </div>
     </div>
   </section>
 
-  <section class="section usps-wrap">
-    <div class="container grid grid--4 usps">
-      {settings.usps.map((u, i) => (
-        <div class="usp">
-          <span class="usp__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={icons[i % icons.length]} /></span>
-          <h3>{u.title}</h3>
-          <p>{u.text}</p>
-        </div>
+  <section class="services-wrap">
+    <div class="container services">
+      {settings.services.map((s) => (
+        <a href={s.link} class="service">
+          <span class="service__icon"><svg viewBox="0 0 24 24" aria-hidden="true" set:html={serviceIcon(s.icon)} /></span>
+          <span class="service__body">
+            <b>{s.title}</b>
+            <span>{s.text}</span>
+          </span>
+          <svg class="service__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+        </a>
       ))}
     </div>
   </section>

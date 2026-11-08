@@ -2,17 +2,17 @@
 @import '@fontsource-variable/bricolage-grotesque';
 
 :root {
-  --c-green: #15803d;
-  --c-green-dark: #106631;
-  --c-green-deep: #0a3d1e;
+  --c-green: #3a7d0e;
+  --c-green-dark: #2e650a;
+  --c-green-deep: #15300a;
   --c-accent: #ffffff;
-  --c-accent-dark: #e3f4e9;
-  --c-mint: #a7f0c0;
-  --c-ink: #13241a;
-  --c-muted: #5a6b61;
+  --c-accent-dark: #eef5e6;
+  --c-mint: #b5e67c;
+  --c-ink: #141c12;
+  --c-muted: #5d665a;
   --c-bg: #ffffff;
-  --c-soft: #f2f8f4;
-  --c-border: #dcebe1;
+  --c-soft: #f6f8f3;
+  --c-border: #e3e8dd;
 
   /* aliases used by components */
   --c-primary: var(--c-green);
@@ -49,7 +49,7 @@ h3 { font-size: 1.25rem; letter-spacing: -0.01em; }
   background: var(--c-green); color: #fff; font-weight: 600; text-decoration: none; border: 2px solid transparent;
   cursor: pointer; font: 600 1rem/1 var(--f-body); transition: transform .15s, background .15s, box-shadow .15s;
 }
-.btn:hover { background: var(--c-green-dark); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(21, 128, 61, .25); }
+.btn:hover { background: var(--c-green-dark); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(58, 125, 14, .25); }
 .btn--light { background: var(--c-accent); color: var(--c-green-deep); }
 .btn--light:hover { background: var(--c-accent-dark); box-shadow: 0 8px 20px rgba(0, 0, 0, .2); }
 .btn--outline { background: transparent; border-color: var(--c-ink); color: var(--c-ink); }
